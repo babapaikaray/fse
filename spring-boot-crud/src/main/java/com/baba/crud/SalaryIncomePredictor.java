@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.baba.crud.model.Constants;
 import com.baba.crud.model.DeductionReport;
 import com.baba.crud.model.IncrementReport;
 import com.baba.crud.model.PredictionReport;
-import com.baba.crud.model.SPInputParams;
+import com.baba.crud.model.InputParams;
 
 public class SalaryIncomePredictor {
 
@@ -16,65 +18,65 @@ public class SalaryIncomePredictor {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner scanner = new Scanner(System.in);
-		SPInputParams ip = new SPInputParams();
-	    //  prompt for the user's name
-	    System.out.print("Starting salary: ");
-	    ip.setStartSal(scanner.next());
-	    
-	    System.out.print("Increment to be received in percent: ");	    
-	    ip.setIncrementPer(scanner.next());
-	    
-	    System.out.print("How frequently increment received: ");	    
-	    ip.setFreqOfIncrement(scanner.next());
-	    
-	    System.out.print("Deductions on income in percent: ");	    
-	    ip.setDeductionPer(scanner.next());	    
-	    
-	    System.out.print("How frequently deductions done: ");	    
-	    ip.setFreqOfDeductions(scanner.next());
-	    
-	    System.out.print("Predictions for (years): ");
-	    ip.setPredictionForYrs(scanner.next());
-	    
-	    if(!validateInput(ip).isEmpty()) {
-	    	List<String> err= validateInput(ip);
-	    	for(String msg : err) {
-	    		System.out.println(msg);
-	    	}
-	    	scanner.close();
-	    	return;
-	    }
-	    List<IncrementReport> incrementRepot = prepareIncrementReport(ip);  
-	    preparePredictionReport(incrementRepot, prepareDeductionReport(ip,incrementRepot));
-	    scanner.close();
+		InputParams ip = new InputParams();
+		//  prompt for the user's name
+		System.out.print("Enter Starting salary: ");
+		ip.setStartSal(scanner.next());
+
+		System.out.print("Increment to be received in percentage: ");	    
+		ip.setIncrementPer(scanner.next());
+
+		System.out.print("How frequently increment received: ");	    
+		ip.setFreqOfIncrement(scanner.next());
+
+		System.out.print("Deductions on income in percent: ");	    
+		ip.setDeductionPer(scanner.next());	    
+
+		System.out.print("How frequently deductions done: ");	    
+		ip.setFreqOfDeductions(scanner.next());
+
+		System.out.print("Predictions for (years): ");
+		ip.setPredictionForYrs(scanner.next());
+
+		if(!validateInput(ip).isEmpty()) {
+			List<String> err= validateInput(ip);
+			for(String msg : err) {
+				System.out.println(msg);
+			}
+			scanner.close();
+			return;
+		}
+		List<IncrementReport> incrementRepot = prepareIncrementReport(ip);  
+		preparePredictionReport(incrementRepot, prepareDeductionReport(ip,incrementRepot));
+		scanner.close();
 	}
-	
-	public static List<String> validateInput(SPInputParams ip) {
+
+	public static List<String> validateInput(InputParams ip) {
 		List<String> errorMsg = new ArrayList<String>();
-		if(null != ip.getStartSal()
-	    		&& new Float(ip.getStartSal()) < 1.0F) {
-			errorMsg.add("Starting salary cannot be less than 1");
-	    }
-		if(null != ip.getIncrementPer()
-	    		&& new Float(ip.getIncrementPer()) < 0.0F) {
-			errorMsg.add("Increment percent cannot be less than 0");
-	    }
-		if(null != ip.getDeductionPer()
-	    		&& new Float(ip.getDeductionPer()) < 0.0F) {
-			errorMsg.add("Decrement percent cannot be less than 0");
-	    }
+		if(null != ip.getStartSal() 
+				&& (!isNumeric(ip.getStartSal()) || new Float(ip.getStartSal()) < 1.0F)) {
+			errorMsg.add("Error! \nStarting salary cannot be less than 1");
+		}
+		if(null != ip.getIncrementPer() && !StringUtils.isNumeric(ip.getIncrementPer())
+				&& (!isNumeric(ip.getIncrementPer()) || new Float(ip.getIncrementPer()) < 0.0F)) {
+			errorMsg.add("Error! \nIncrement percent cannot be less than 0");
+		}
+		if(null != ip.getDeductionPer() && !StringUtils.isNumeric(ip.getDeductionPer())
+				&& (!isNumeric(ip.getDeductionPer()) || new Float(ip.getDeductionPer()) < 0.0F)) {
+			errorMsg.add("Error! \nDecrement percent cannot be less than 0");
+		}
 		return errorMsg;
 	}
-	
-	public static List<IncrementReport>  prepareIncrementReport(SPInputParams ip) {		
-		
+
+	public static List<IncrementReport>  prepareIncrementReport(InputParams ip) {		
+
 		Float startSal = new Float(ip.getStartSal());
-		Float incrementPer = new Float(ip.getIncrementPer())/100;
+		Float incrementPer = new Float(ip.getIncrementPer());
 		int predictionYrs = Integer.parseInt(ip.getPredictionForYrs());
 		int freqOfIncr = 0;
 		Float incrementAmt = 0.0F;
 		List<IncrementReport> lst = new ArrayList<>();		
-		
+
 		if(ip.getFreqOfIncrement().equalsIgnoreCase("QUARTERLY")) {
 			freqOfIncr = Constants.QUARTERLY;			
 		}else if(ip.getFreqOfIncrement().equalsIgnoreCase("HALF-YEARLY")) {
@@ -102,17 +104,17 @@ public class SalaryIncomePredictor {
 		}		
 		return lst;		
 	}
-	
 
-public static List<DeductionReport>  prepareDeductionReport(SPInputParams ip,List<IncrementReport> ir) {		
-		
-		
+
+	public static List<DeductionReport>  prepareDeductionReport(InputParams ip,List<IncrementReport> ir) {		
+
+
 		Float deductionPer = new Float(ip.getDeductionPer())/100;
 		int predictionYrs = Integer.parseInt(ip.getPredictionForYrs());
 		int freqOfDeduction = 0;
 		Float deductionAmt = 0.0F;
 		List<DeductionReport> lst = new ArrayList<>();		
-		
+
 		if(ip.getFreqOfIncrement().equalsIgnoreCase("QUARTERLY")) {
 			freqOfDeduction = Constants.QUARTERLY;			
 		}else if(ip.getFreqOfIncrement().equalsIgnoreCase("HALF-YEARLY")) {
@@ -140,27 +142,39 @@ public static List<DeductionReport>  prepareDeductionReport(SPInputParams ip,Lis
 		return lst;		
 	}
 
-public static List<PredictionReport>  preparePredictionReport(List<IncrementReport> ir, List<DeductionReport> dr) {		
+	public static List<PredictionReport>  preparePredictionReport(List<IncrementReport> ir, List<DeductionReport> dr) {		
+
+
+		List<PredictionReport> lst = new ArrayList<>();		
+
+
+		System.out.println("\n\n--Prediction Report----");
+		System.out.println("Year  Starting Salary  Increment Amount  Deduction Amount  Growth");
+		int i = 1;
+
+		for(IncrementReport irR: ir ) {		
+			DeductionReport drObj = dr.get(i-1);
+			PredictionReport pr = new PredictionReport();
+			pr.setDeductiontAmt(drObj.getDeductionAmt());
+			pr.setIncrementAmt(irR.getIncrementAmt());
+			pr.setGrowthPer((((irR.getStartingSal()+(irR.getIncrementAmt() - drObj.getDeductionAmt()))/irR.getStartingSal())*100)-100);
+			pr.setStartingSal(irR.getStartingSal());
+
+			System.out.println(i+"	"+pr.getStartingSal()+"		 "+pr.getIncrementAmt()+"		 "+pr.getDeductiontAmt()+" 		"+pr.getGrowthPer());
+			i++;
+		}		
+		return lst;		
+	}
 	
-	
-	List<PredictionReport> lst = new ArrayList<>();		
-	
-	
-	System.out.println("\n\n--Prediction Report----");
-	System.out.println("Year  Starting Salary  Increment Amount  Deduction Amount  Growth");
-	int i = 1;
-	
-	for(IncrementReport irR: ir ) {		
-		DeductionReport drObj = dr.get(i-1);
-		PredictionReport pr = new PredictionReport();
-		pr.setDeductiontAmt(drObj.getDeductionAmt());
-		pr.setIncrementAmt(irR.getIncrementAmt());
-		pr.setGrowthPer((((irR.getStartingSal()+(irR.getIncrementAmt() - drObj.getDeductionAmt()))/irR.getStartingSal())*100)-100);
-		pr.setStartingSal(irR.getStartingSal());
-		
-		System.out.println(i+"	"+pr.getStartingSal()+"		 "+pr.getIncrementAmt()+"		 "+pr.getDeductiontAmt()+" 		"+pr.getGrowthPer());
-		i++;
-	}		
-	return lst;		
-}
+	public static boolean isNumeric(String str){
+		if(StringUtils.isBlank(str)){
+			return false;
+		}
+		try {
+            Double.parseDouble(str);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+		return true;
+	}
 }

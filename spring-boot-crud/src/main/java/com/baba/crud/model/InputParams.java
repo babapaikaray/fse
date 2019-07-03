@@ -1,6 +1,6 @@
 package com.baba.crud.model;
 
-public class SPInputParams {
+public class InputParams {
 	
 	String startSal = "";
 	String incrementPer = "";
