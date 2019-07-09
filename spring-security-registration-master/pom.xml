@@ -4,10 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.baeldung</groupId>
-	<artifactId>spring-security-login-and-registration</artifactId>
+	<artifactId>login-and-registration</artifactId>
 	<version>1.0.1-SNAPSHOT</version>
 
-	<name>spring-security-login-and-registration</name>
+	<name>login-and-registration</name>
 	<packaging>war</packaging>
 
 	<parent>
@@ -159,7 +159,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>spring-security-login-and-registration</finalName>
+		<finalName>login-and-registration</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>

@@ -22,7 +22,55 @@
         }
     }
     
+    var serverContext = [[@{/}]];
+
+$(document).ready(function () {
+	$('form').submit(function(event) {
+		register(event);
+	});
+	
+});
+
+function register(event){
+	event.preventDefault();
+    $(".alert").html("").hide();
+    $(".error-list").html("");
+    if (typeof grecaptcha !== 'undefined') {
+        var resp = grecaptcha.getResponse();
+        if (resp.length == 0) {
+            $("#captchaError").show().html("Please verify that you are not a robot.");
+            return;
+        }
+    }
+    var formData= $('form').serialize();
+    $.post(serverContext + "user/registrationCaptcha",formData ,function(data){
+        if(data.message == "success"){
+            window.location.href = serverContext + "successRegister.html";
+        }
+        
+    })
+    .fail(function(data) {
+        grecaptcha.reset();
+
+        if(data.responseJSON.error == "InvalidReCaptcha"){
+            $("#captchaError").show().html(data.responseJSON.message);
+        }
+        
+    });
+}
+
+var onReCaptchaSuccess = function(response) {
+    $("#captchaError").html("").hide();
+};
+
+var onReCaptchaExpired = function(response) {
+    $("#captchaError").html("reCaptcha has expired.  Please solve a new reCaptcha").show();
+    grecaptcha.reset();
+};
+    
 </script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <style type="text/css">
 .wrapper{width:500px;margin-left:auto;margin-right:auto}
 label{padding-left:0 !important}
@@ -53,15 +101,16 @@ label{padding-left:0 !important}
                  <span class="col-sm-8"><input class="form-control" type='password' name='password' /></span>
                 
                 <br/><br/>        
-                 <label class="col-sm-4" th:text="#{label.form.login2fa}">Google Authenticator Verification Code</label>
-                 <span class="col-sm-8"><input class="form-control" type='text' name='code' /></span>
+                    <!-- to enable captcha uncomment the keys in application.properties -->
+                    <label class="col-sm-4">Captcha</label>
+                    <div class="g-recaptcha col-sm-8" th:attr="data-sitekey=${@captchaService.getReCaptchaSite()}" data-callback="onReCaptchaSuccess" data-expired-callback="onReCaptchaExpired"></div>
+                    <span id="captchaError" class="alert alert-danger col-sm-4" style="display:none"></span>
                 
                 <br/><br/>
                  <input class="btn btn-primary" name="submit" type="submit" th:value="#{label.form.submit}" />
  
             </form>
             <br/> Current Locale :  <span th:text="${#locale}"></span><br/><br/> 
-             <a class="btn btn-default" th:href="@{/registration.html}" th:text="#{label.form.loginSignUp}">signup</a>
              <br/>
              <a class="btn btn-default" th:href="@{/registrationCaptcha.html}" th:text="#{label.form.loginSignUpCaptcha}">captcha signup</a>
              <br/><br/>
