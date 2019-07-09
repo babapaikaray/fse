@@ -111,7 +111,9 @@ public class RegistrationController {
     public GenericResponse resendRegistrationToken(final HttpServletRequest request, @RequestParam("token") final String existingToken) {
         final VerificationToken newToken = userService.generateNewVerificationToken(existingToken);
         final User user = userService.getUser(newToken.getToken());
-        mailSender.send(constructResendVerificationTokenEmail(getAppUrl(request), request.getLocale(), newToken, user));
+        SimpleMailMessage email = constructResendVerificationTokenEmail(getAppUrl(request), request.getLocale(), newToken, user);
+        System.out.println("email.getText"+email.getText());
+        mailSender.send(email);
         return new GenericResponse(messages.getMessage("message.resendToken", null, request.getLocale()));
     }
 
@@ -123,7 +125,9 @@ public class RegistrationController {
         if (user != null) {
             final String token = UUID.randomUUID().toString();
             userService.createPasswordResetTokenForUser(user, token);
-            mailSender.send(constructResetTokenEmail(getAppUrl(request), request.getLocale(), token, user));
+            SimpleMailMessage email = constructResetTokenEmail(getAppUrl(request), request.getLocale(), token, user);
+            System.out.println("email.getText"+email.getText());
+            mailSender.send(email);
         }
         return new GenericResponse(messages.getMessage("message.resetPasswordEmail", null, request.getLocale()));
     }

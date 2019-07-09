@@ -40,7 +40,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         service.createVerificationTokenForUser(user, token);
 
         final SimpleMailMessage email = constructEmailMessage(event, user, token);
-        mailSender.send(email);
+        //mailSender.send(email);
     }
 
     //
@@ -49,6 +49,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         final String recipientAddress = user.getEmail();
         final String subject = "Registration Confirmation";
         final String confirmationUrl = event.getAppUrl() + "/registrationConfirm.html?token=" + token;
+        System.out.println("confirmationUrl"+confirmationUrl);
         final String message = messages.getMessage("message.regSucc", null, event.getLocale());
         final SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(recipientAddress);

@@ -126,7 +126,8 @@ public class OldRegistrationController {
         try {
             final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
             final SimpleMailMessage email = constructResetVerificationTokenEmail(appUrl, request.getLocale(), newToken, user);
-            mailSender.send(email);
+            System.out.println("email.getText"+email.getText());
+            //mailSender.send(email);
         } catch (final MailAuthenticationException e) {
             LOGGER.debug("MailAuthenticationException", e);
             return "redirect:/emailError.html?lang=" + locale.getLanguage();
@@ -152,6 +153,7 @@ public class OldRegistrationController {
         try {
             final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
             final SimpleMailMessage email = constructResetTokenEmail(appUrl, request.getLocale(), token, user);
+            System.out.println("email.getText"+email.getText());
             mailSender.send(email);
         } catch (final MailAuthenticationException e) {
             LOGGER.debug("MailAuthenticationException", e);

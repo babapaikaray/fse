@@ -108,15 +108,21 @@ public class DeviceService {
 
         String location = UNKNOWN;
 
-        InetAddress ipAddress = InetAddress.getByName(ip);
+        try {
+			InetAddress ipAddress = InetAddress.getByName(ip);
 
-        CityResponse cityResponse = databaseReader.city(ipAddress);
-        if (Objects.nonNull(cityResponse) &&
-                Objects.nonNull(cityResponse.getCity()) &&
-                !Strings.isNullOrEmpty(cityResponse.getCity().getName())) {
+			CityResponse cityResponse = databaseReader.city(ipAddress);
+			if (Objects.nonNull(cityResponse) &&
+			        Objects.nonNull(cityResponse.getCity()) &&
+			        !Strings.isNullOrEmpty(cityResponse.getCity().getName())) {
 
-            location = cityResponse.getCity().getName();
-        }
+			    location = cityResponse.getCity().getName();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "localhost";
+		}
 
         return location;
     }
@@ -156,7 +162,8 @@ public class DeviceService {
         notification.setText(text);
         notification.setFrom(from);
 
-        mailSender.send(notification);
+        System.out.println("mailSender text"+text);
+        //mailSender.send(notification);
     }
 
 }

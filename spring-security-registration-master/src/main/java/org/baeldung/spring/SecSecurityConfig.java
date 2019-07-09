@@ -90,7 +90,6 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/homepage.html")
                 .failureUrl("/login?error=true")
                 .successHandler(myAuthenticationSuccessHandler)
-                .failureHandler(authenticationFailureHandler)
                 .authenticationDetailsSource(authenticationDetailsSource)
             .permitAll()
                 .and()
