@@ -44,7 +44,7 @@ public class RegistrationCaptchaController {
         final String response = request.getParameter("g-recaptcha-response");
         captchaService.processResponse(response);
 
-        LOGGER.debug("Registering user   account with information: {}", accountDto);
+        LOGGER.debug("Registering   user   account with information: {}", accountDto);
 
         final User registered = userService.registerNewUserAccount(accountDto);
         eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));
