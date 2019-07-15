@@ -1,4 +1,4 @@
-package org.baeldung.test;
+package com.baba.test;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
@@ -18,11 +18,11 @@ import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.baeldung.Application;
-import org.baeldung.persistence.model.User;
-import org.baeldung.persistence.model.VerificationToken;
-import org.baeldung.spring.TestDbConfig;
-import org.baeldung.spring.TestIntegrationConfig;
+import com.baba.Application;
+import com.baba.persistence.model.User;
+import com.baba.persistence.model.VerificationToken;
+import com.baba.spring.TestDbConfig;
+import com.baba.spring.TestIntegrationConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

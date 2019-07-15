@@ -1,4 +1,4 @@
-package org.baeldung.test;
+package com.baba.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -14,13 +14,13 @@ import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.baeldung.persistence.dao.UserRepository;
-import org.baeldung.persistence.dao.VerificationTokenRepository;
-import org.baeldung.persistence.model.User;
-import org.baeldung.persistence.model.VerificationToken;
-import org.baeldung.spring.TestDbConfig;
-import org.baeldung.spring.TestTaskConfig;
-import org.baeldung.task.TokensPurgeTask;
+import com.baba.persistence.dao.UserRepository;
+import com.baba.persistence.dao.VerificationTokenRepository;
+import com.baba.persistence.model.User;
+import com.baba.persistence.model.VerificationToken;
+import com.baba.spring.TestDbConfig;
+import com.baba.spring.TestTaskConfig;
+import com.baba.task.TokensPurgeTask;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

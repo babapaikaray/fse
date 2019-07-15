@@ -1,4 +1,4 @@
-package org.baeldung.test;
+package com.baba.test;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

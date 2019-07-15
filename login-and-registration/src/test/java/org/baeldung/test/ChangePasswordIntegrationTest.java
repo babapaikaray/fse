@@ -1,4 +1,4 @@
-package org.baeldung.test;
+package com.baba.test;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
@@ -13,11 +13,11 @@ import io.restassured.specification.RequestSpecification;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.baeldung.Application;
-import org.baeldung.persistence.dao.UserRepository;
-import org.baeldung.persistence.model.User;
-import org.baeldung.spring.TestDbConfig;
-import org.baeldung.spring.TestIntegrationConfig;
+import com.baba.Application;
+import com.baba.persistence.dao.UserRepository;
+import com.baba.persistence.model.User;
+import com.baba.spring.TestDbConfig;
+import com.baba.spring.TestIntegrationConfig;
 import org.hamcrest.core.IsNot;
 import org.junit.Before;
 import org.junit.Test;

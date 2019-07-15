@@ -1,14 +1,14 @@
-package org.baeldung.test;
+package com.baba.test;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.baeldung.Application;
-import org.baeldung.persistence.dao.DeviceMetadataRepository;
-import org.baeldung.persistence.dao.UserRepository;
-import org.baeldung.persistence.model.DeviceMetadata;
-import org.baeldung.persistence.model.User;
-import org.baeldung.spring.TestDbConfig;
-import org.baeldung.spring.TestIntegrationConfig;
+import com.baba.Application;
+import com.baba.persistence.dao.DeviceMetadataRepository;
+import com.baba.persistence.dao.UserRepository;
+import com.baba.persistence.model.DeviceMetadata;
+import com.baba.persistence.model.User;
+import com.baba.spring.TestDbConfig;
+import com.baba.spring.TestIntegrationConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

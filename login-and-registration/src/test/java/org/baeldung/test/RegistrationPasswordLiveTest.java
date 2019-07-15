@@ -1,4 +1,4 @@
-package org.baeldung.test;
+package com.baba.test;
 
 import static org.junit.Assert.assertEquals;
 import io.restassured.RestAssured;

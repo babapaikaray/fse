@@ -1,4 +1,4 @@
-package org.baeldung.spring;
+package com.baba.spring;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,7 +15,7 @@ import java.util.Properties;
 
 @Configuration
 @Primary
-@ComponentScan({ "org.baeldung.persistence.dao" })
+@ComponentScan({ "com.baba.persistence.dao" })
 public class TestDbConfig extends PersistenceJPAConfig {
 
     @Bean

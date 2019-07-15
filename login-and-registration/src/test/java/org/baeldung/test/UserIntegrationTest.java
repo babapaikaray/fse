@@ -1,4 +1,4 @@
-package org.baeldung.test;
+package com.baba.test;
 
 import static org.junit.Assert.assertTrue;
 
@@ -7,15 +7,15 @@ import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.baeldung.persistence.dao.UserRepository;
-import org.baeldung.persistence.dao.VerificationTokenRepository;
-import org.baeldung.persistence.model.User;
-import org.baeldung.persistence.model.VerificationToken;
-import org.baeldung.spring.LoginNotificationConfig;
-import org.baeldung.spring.ServiceConfig;
-import org.baeldung.spring.TestDbConfig;
-import org.baeldung.spring.TestIntegrationConfig;
-import org.baeldung.validation.EmailExistsException;
+import com.baba.persistence.dao.UserRepository;
+import com.baba.persistence.dao.VerificationTokenRepository;
+import com.baba.persistence.model.User;
+import com.baba.persistence.model.VerificationToken;
+import com.baba.spring.LoginNotificationConfig;
+import com.baba.spring.ServiceConfig;
+import com.baba.spring.TestDbConfig;
+import com.baba.spring.TestIntegrationConfig;
+import com.baba.validation.EmailExistsException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;

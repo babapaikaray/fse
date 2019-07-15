@@ -1,4 +1,4 @@
-package org.baeldung.test;
+package com.baba.test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -6,13 +6,13 @@ import static org.junit.Assert.assertNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.baeldung.persistence.dao.PrivilegeRepository;
-import org.baeldung.persistence.dao.RoleRepository;
-import org.baeldung.persistence.dao.UserRepository;
-import org.baeldung.persistence.model.Privilege;
-import org.baeldung.persistence.model.Role;
-import org.baeldung.persistence.model.User;
-import org.baeldung.spring.TestDbConfig;
+import com.baba.persistence.dao.PrivilegeRepository;
+import com.baba.persistence.dao.RoleRepository;
+import com.baba.persistence.dao.UserRepository;
+import com.baba.persistence.model.Privilege;
+import com.baba.persistence.model.Role;
+import com.baba.persistence.model.User;
+import com.baba.spring.TestDbConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

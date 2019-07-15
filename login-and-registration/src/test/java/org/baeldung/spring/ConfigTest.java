@@ -1,4 +1,4 @@
-package org.baeldung.spring;
+package com.baba.spring;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,7 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-// @ComponentScan("org.baeldung.test")
+// @ComponentScan("com.baba.test")
 public class ConfigTest implements WebMvcConfigurer {
 
     public ConfigTest() {
